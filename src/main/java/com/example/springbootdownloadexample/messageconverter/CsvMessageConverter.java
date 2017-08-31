@@ -33,7 +33,7 @@ public class CsvMessageConverter extends AbstractHttpMessageConverter<PersonList
                                  HttpOutputMessage httpOutputMessage) throws IOException, HttpMessageNotWritableException {
         try {
             String csv = CsvSerializer.toCsv(people);
-            httpOutputMessage.getHeaders().set("Content-Disposition", "attachment; filename=people.csv");
+            httpOutputMessage.getHeaders().set("Content-Disposition", "attachment; filename=entities.csv");
             httpOutputMessage.getBody().write(csv.getBytes());
         } catch (Exception e) {
             throw new HttpMessageNotWritableException("Cannot write PDF", e);

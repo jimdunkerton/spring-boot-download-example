@@ -37,7 +37,7 @@ public class PdfMessageConverter extends AbstractHttpMessageConverter<PersonList
                                  HttpOutputMessage httpOutputMessage) throws IOException, HttpMessageNotWritableException {
         try {
             ByteArrayInputStream pdf = PdfSerializer.toPdf(people);
-            httpOutputMessage.getHeaders().set("Content-Disposition", "attachment; filename=people.pdf");
+            httpOutputMessage.getHeaders().set("Content-Disposition", "attachment; filename=entities.pdf");
             IOUtils.copy(pdf, httpOutputMessage.getBody());
         } catch (Exception e) {
             throw new HttpMessageNotWritableException("Cannot write PDF", e);

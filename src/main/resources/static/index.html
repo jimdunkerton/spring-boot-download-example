@@ -1,8 +1,24 @@
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="css/download.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/download.js"></script>
 </head>
 <body>
-    <h1 align="center">Spring Boot Download Example</h1>
+    <h1 class="title">Spring Boot Download Example</h1>
+    <div>
+        <h2 class="title">CSV</h2>
+        <button>Download CSV as entities</button>
+        <button>Download CSV as InputStreamResource</button>
+        <button>Download CSV as Byte Array</button>
+        <button>Download CSV written to Servlet Response</button>
+    </div>
+    <div>
+        <h2 class="title">PDF</h2>
+        <button>Download PDF as entities</button>
+        <button>Download PDF as InputStreamResource</button>
+        <button>Download PDF as Byte Array</button>
+        <button>Download PDF written to Servlet Response</button>
+    </div>
 </body>
 </html>
