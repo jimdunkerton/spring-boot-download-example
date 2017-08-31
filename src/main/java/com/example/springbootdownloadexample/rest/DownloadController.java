@@ -41,7 +41,7 @@ public class DownloadController {
         PersonList people = this.repo.getPeople();
         if (accept.equals("text/csv")) {
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("Content-Disposition", "attachment; filename=isr.pdf");
+            responseHeaders.set("Content-Disposition", "attachment; filename=isr.csv");
             String csv = CsvSerializer.toCsv(people);
             return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(csv.getBytes())), responseHeaders, HttpStatus.OK);
         } else {
@@ -59,7 +59,7 @@ public class DownloadController {
         PersonList people = this.repo.getPeople();
         if (accept.equals("text/csv")) {
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("Content-Disposition", "attachment; filename=bytes.pdf");
+            responseHeaders.set("Content-Disposition", "attachment; filename=bytes.csv");
             String csv = CsvSerializer.toCsv(people);
             return new ResponseEntity<>(csv.getBytes(), responseHeaders, HttpStatus.OK);
         } else {
