@@ -10,8 +10,10 @@ $(document).ready(function () {
   function getMediaType(buttonText) {
     if (buttonText.indexOf('CSV') > -1) {
       return 'text/csv';
-    } else {
+    } else if (buttonText.indexOf('PDF') > -1) {
       return 'application/pdf';
+    } else {
+      return 'application/json';
     }
   }
 
@@ -36,7 +38,7 @@ $(document).ready(function () {
       success: function (data, status, response) {
         var filename = getFilename(response) || 'people';
         var a = document.createElement('a');
-        var blob = new Blob([data], {'type': mediaType});
+        var blob = new Blob([mediaType === 'application/json' ? JSON.stringify(data) : data], {'type': mediaType});
         var objectURL = window.URL.createObjectURL(blob);
         console.log(objectURL);
         a.href = objectURL;
