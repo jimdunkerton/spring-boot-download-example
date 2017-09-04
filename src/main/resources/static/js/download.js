@@ -24,6 +24,8 @@ $(document).ready(function () {
       return '/isr';
     } else if (buttonText.indexOf('Byte') > -1) {
       return '/bytes';
+    } else if (buttonText.indexOf('StreamingResponseBody') > -1) {
+      return '/async'
     } else {
       return '/servletresponse';
     }

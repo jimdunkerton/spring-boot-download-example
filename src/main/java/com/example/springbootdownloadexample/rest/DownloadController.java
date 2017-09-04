@@ -4,6 +4,7 @@ import com.example.springbootdownloadexample.model.PersonList;
 import com.example.springbootdownloadexample.repository.PersonRepository;
 import com.example.springbootdownloadexample.serialization.CsvSerializer;
 import com.example.springbootdownloadexample.serialization.PdfSerializer;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+
+import java.io.ByteArrayInputStream;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
 
 @RestController
 public class DownloadController {
@@ -39,13 +42,12 @@ public class DownloadController {
             produces = {"text/csv", "application/pdf"})
     public ResponseEntity<InputStreamResource> getAsInputStreamResourceEntity(@RequestHeader("Accept") String accept) throws Exception {
         PersonList people = this.repo.getPeople();
+        HttpHeaders responseHeaders = new HttpHeaders();
         if (accept.equals("text/csv")) {
-            HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("Content-Disposition", "attachment; filename=isr.csv");
             String csv = CsvSerializer.toCsv(people);
             return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(csv.getBytes())), responseHeaders, HttpStatus.OK);
         } else {
-            HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("Content-Disposition", "attachment; filename=isr.pdf");
             ByteArrayInputStream pdf = PdfSerializer.toPdf(people);
             return new ResponseEntity<>(new InputStreamResource(pdf), responseHeaders, HttpStatus.OK);
@@ -57,16 +59,38 @@ public class DownloadController {
             produces = {"text/csv", "application/pdf"})
     public ResponseEntity<byte[]> getAsByteArrayEntity(@RequestHeader("Accept") String accept) throws Exception {
         PersonList people = this.repo.getPeople();
+        HttpHeaders responseHeaders = new HttpHeaders();
         if (accept.equals("text/csv")) {
-            HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("Content-Disposition", "attachment; filename=bytes.csv");
             String csv = CsvSerializer.toCsv(people);
             return new ResponseEntity<>(csv.getBytes(), responseHeaders, HttpStatus.OK);
         } else {
-            HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("Content-Disposition", "attachment; filename=bytes.pdf");
             ByteArrayInputStream pdf = PdfSerializer.toPdf(people);
             return new ResponseEntity<>(IOUtils.toByteArray(pdf), responseHeaders, HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = "/download/async",
+            method = RequestMethod.GET,
+            produces = {"text/csv", "application/pdf"})
+    public ResponseEntity<StreamingResponseBody> getAsStreamingResponseBody(@RequestHeader("Accept") String accept) throws Exception {
+        PersonList people = this.repo.getPeople();
+        HttpHeaders responseHeaders = new HttpHeaders();
+        if (accept.equals("text/csv")) {
+            responseHeaders.set("Content-Disposition", "attachment; filename=async.csv");
+            String csv = CsvSerializer.toCsv(people);
+            return new ResponseEntity<>(
+                    outputStream -> outputStream.write(csv.getBytes()),
+                    responseHeaders,
+                    HttpStatus.OK);
+        } else {
+            responseHeaders.set("Content-Disposition", "attachment; filename=async.pdf");
+            ByteArrayInputStream pdf = PdfSerializer.toPdf(people);
+            return new ResponseEntity<>(
+                    outputStream -> outputStream.write(IOUtils.toByteArray(pdf)),
+                    responseHeaders,
+                    HttpStatus.OK);
         }
     }
 
