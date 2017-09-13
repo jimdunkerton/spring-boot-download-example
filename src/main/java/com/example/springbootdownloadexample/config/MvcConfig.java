@@ -25,8 +25,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
                 //.useJaf(false)
                 .favorParameter(false)
                 //.parameterName("media-type")
-                .ignoreAcceptHeader(false);
-                //.defaultContentType(MediaType.valueOf("application/json"));
+                .ignoreAcceptHeader(false)
+                .defaultContentType(MediaType.valueOf("application/pdf"));
     }
 
     @Override

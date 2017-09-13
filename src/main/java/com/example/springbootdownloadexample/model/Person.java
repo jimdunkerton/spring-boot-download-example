@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,10 +19,11 @@ import java.util.List;
 })
 @Data
 @AllArgsConstructor
+@ToString
 public class Person {
 
     @JsonProperty("First Name")
-    private String firsName;
+    private String firstName;
 
     @JsonProperty("Last Name")
     private String lastName;

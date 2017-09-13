@@ -1,5 +1,6 @@
 package com.example.springbootdownloadexample.serialization;
 
+import com.example.springbootdownloadexample.model.Person;
 import com.example.springbootdownloadexample.model.PersonList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -20,11 +21,17 @@ public class PdfSerializer {
         document.addPage(singlePage);
 
         PDPageContentStream contentStream = new PDPageContentStream(document, singlePage);
-        contentStream.beginText();
         contentStream.setFont(courierBoldFont, fontSize);
-        contentStream.newLineAtOffset(150, 750);
-        contentStream.showText("This should contain people");
-        contentStream.endText();
+        int x = 10;
+        int y = 750;
+        for (Person person : people.getList()) {
+            contentStream.beginText();
+            contentStream.newLineAtOffset(x, y);
+            contentStream.showText(person.toString());
+            contentStream.endText();
+            y -= 20;
+        }
+
         contentStream.close();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
