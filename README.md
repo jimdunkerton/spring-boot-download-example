@@ -15,7 +15,7 @@ For each media type, whichever endpoint is chosen, the result should be the same
 
 Build and run the project using:
 
-* mvn clean install && java -jar spring-boot-download-example-0.0.1-SNAPSHOT.jar *
+* mvn clean install && java -jar target/spring-boot-download-example-0.0.1-SNAPSHOT.jar *
 
 Then visit the webpage at http://localhost:8080.
 
