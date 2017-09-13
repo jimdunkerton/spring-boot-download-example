@@ -15,11 +15,11 @@ For each media type, whichever endpoint is chosen, the result should be the same
 
 Build and run the project using:
 
-* mvn clean install && java -jar target/spring-boot-download-example-0.0.1-SNAPSHOT.jar *
+*mvn clean install && java -jar target/spring-boot-download-example-0.0.1-SNAPSHOT.jar*
 
 Then visit the webpage at http://localhost:8080.
 
 Note: PDF downloads not currently delivered correctly through the web page.  Instead, curl can be used like so:
 
-* curl -v http://localhost:8080/download/servletresponse -H "Accept: application/pdf" -o ~/Downloads/servletresponse.pdf *
+*curl -v http://localhost:8080/download/servletresponse -H "Accept: application/pdf" -o ~/Downloads/servletresponse.pdf*
 
