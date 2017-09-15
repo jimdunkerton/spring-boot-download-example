@@ -21,5 +21,5 @@ Then visit the webpage at http://localhost:8080.  Log in with "user" and "passwo
 
 Note: PDF downloads not currently delivered correctly through the web page.  Instead, curl can be used like so:
 
-*curl -v http://localhost:8080/download/servletresponse -H "Accept: application/pdf" -o ~/Downloads/servletresponse.pdf*
+*curl -v http://localhost:8080/api/download/servletresponse -H "Accept: application/pdf" -o ~/Downloads/servletresponse.pdf*
 
