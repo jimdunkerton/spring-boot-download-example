@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,9 +19,9 @@ public class ExceptionHandling {
     private static final Logger LOG = Logger.getLogger(ExceptionHandling.class);
 
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = HttpMediaTypeNotAcceptableException.class)
     public void handleNotAcceptable(HttpServletResponse response,
-                                    Exception e) {
+                                    HttpMediaTypeNotAcceptableException e) {
         serializeException(response, e);
     }
 
