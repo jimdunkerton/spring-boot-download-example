@@ -20,11 +20,17 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .and()
-                .exceptionHandling().authenticationEntryPoint((httpServletRequest, httpServletResponse, e) -> {
-                    httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-                    ExceptionHandling.serializeException(httpServletResponse, e);
-                }
-        )
+                .exceptionHandling()
+                    .authenticationEntryPoint((httpServletRequest, httpServletResponse, e) -> {
+                            httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+                            ExceptionHandling.serializeException(httpServletResponse, e);
+                        }
+                    )
+                    .accessDeniedHandler((httpServletRequest, httpServletResponse, e) -> {
+                            httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
+                            ExceptionHandling.serializeException(httpServletResponse, e);
+                        }
+                )
                 .and()
                 .csrf()
                 .disable();
