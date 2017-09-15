@@ -11,6 +11,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ import java.io.ByteArrayInputStream;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@RequestMapping("/api")
+@PreAuthorize("hasAuthority('USER')")
 public class DownloadController {
 
     private PersonRepository repo;

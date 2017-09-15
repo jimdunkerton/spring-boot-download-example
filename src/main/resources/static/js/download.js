@@ -36,7 +36,7 @@ $(document).ready(function () {
       headers: {
         Accept: mediaType
       },
-      url: 'download' + pathParam,
+      url: '/api/download' + pathParam,
       success: function (data, status, response) {
         var filename = getFilename(response) || 'people';
         var a = document.createElement('a');

@@ -18,15 +18,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         // Do not use path suffix or query parameter.
         // Only evaluate 'Accept' header.
-        // Fall back to PDF as a default.
         configurer.favorPathExtension(false)
                 //.ignoreUnknownPathExtensions(false)
                 //.mediaType("csv", new MediaType("text", "csv"))
                 //.useJaf(false)
                 .favorParameter(false)
                 //.parameterName("media-type")
-                .ignoreAcceptHeader(false)
-                .defaultContentType(MediaType.valueOf("application/pdf"));
+                .ignoreAcceptHeader(false);
+                //.defaultContentType(MediaType.valueOf("application/pdf"));
     }
 
     @Override
@@ -38,7 +37,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         // Add custom converters here.
-        // JSON and XML converters (both supplied by the Jackson library) are in by default.
+        // JSON converter (Jackson) is in by default.
         converters.add(new CsvMessageConverter());
         converters.add(new PdfMessageConverter());
     }

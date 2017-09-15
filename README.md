@@ -17,7 +17,7 @@ Build and run the project using:
 
 *mvn clean install && java -jar target/spring-boot-download-example-0.0.1-SNAPSHOT.jar*
 
-Then visit the webpage at http://localhost:8080.
+Then visit the webpage at http://localhost:8080.  Log in with "user" and "password".
 
 Note: PDF downloads not currently delivered correctly through the web page.  Instead, curl can be used like so:
 
