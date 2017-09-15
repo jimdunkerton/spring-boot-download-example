@@ -20,7 +20,10 @@ public class LoginFormSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .successHandler((httpServletRequest, httpServletResponse, authentication) ->
-                        httpServletResponse.sendRedirect("/web/download.html"));
+                        httpServletResponse.sendRedirect("/web/download.html"))
+                .and()
+                .csrf()
+                .disable();
     }
 
     @Bean

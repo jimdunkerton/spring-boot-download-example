@@ -24,6 +24,9 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                     httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
                     ExceptionHandling.serializeException(httpServletResponse, e);
                 }
-        );
+        )
+                .and()
+                .csrf()
+                .disable();
     }
 }
