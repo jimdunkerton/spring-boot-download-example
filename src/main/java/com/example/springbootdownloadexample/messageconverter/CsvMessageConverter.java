@@ -36,7 +36,7 @@ public class CsvMessageConverter extends AbstractHttpMessageConverter<PersonList
             httpOutputMessage.getHeaders().set("Content-Disposition", "attachment; filename=entities.csv");
             httpOutputMessage.getBody().write(csv.getBytes());
         } catch (Exception e) {
-            throw new HttpMessageNotWritableException("Cannot write PDF", e);
+            throw new HttpMessageNotWritableException("Cannot write CSV", e);
         }
 
     }
